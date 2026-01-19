@@ -2,6 +2,15 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
+def show_wrong_rgb_img(img, title="Imagen", cmap=None):
+    # esta funcion es para mostrar que es lo que pasa si no se hace la correccion
+    # de los canales de color de BGR a RGB
+    plt.figure(figsize=(6, 6))
+    plt.title(title)
+    plt.imshow(img, cmap=cmap)
+    plt.axis('off')
+    plt.show()
+
 def show_img(img, title="Imagen", cmap=None):
     plt.figure(figsize=(6, 6))
     plt.title(title)
@@ -100,3 +109,8 @@ if __name__ == "__main__":
         # 3. Segmentación
         #seg_img = hsv_segmentation(img)
         #show_img(seg_img, "Segmentación HSV")
+
+
+        # 4. para la pregunta post practica acerca de que pasa si no se corrigen los canales de color
+        wrong_rgb_img = manual_gamma_correction(img, 2)
+        show_wrong_rgb_img(wrong_rgb_img, "Imagen sin ajustar los canales de color")
