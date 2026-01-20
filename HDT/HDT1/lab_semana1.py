@@ -41,8 +41,19 @@ def manual_contrast_brightness(image, alpha, beta):
     # 3. Aplicar np.clip para evitar valores fuera de rango
     # 4. Des-normalizar (x255) y castear a uint8
     
-    # TODO: Escribir código aquí
-    processed_img = np.zeros_like(image) # Placeholder
+    # Se convierte la imagen a float32 y se normaliza a [0, 1]
+    img_float = image.astype(np.float32) / 255.0
+
+    # Se aplicó la fórmula matemática de forma vectorizada sin bucles
+    beta_norm = beta / 255.0
+    transformed = alpha * img_float + beta_norm
+
+    # Se aplica np.clip para evitar valores fuera de rango
+    clipped = np.clip(transformed, 0.0, 1.0)
+
+    # Se realizó la des-normalización y el casteo a uint8
+    processed_img = (clipped * 255.0).astype(np.uint8)
+    
     return processed_img
 
 def manual_gamma_correction(image, gamma):
